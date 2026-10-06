@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#183c35"><meta name="description" content="Practica la propiedad distributiva y el factor común con 16 ejercicios interactivos para 1.º de ESO.">
+<title>Mates en práctica · Distributiva y factor común</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23183c35'/%3E%3Ctext x='20' y='29' text-anchor='middle' font-size='30' fill='%23d8f36a'%3E×%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+</head>
+<body>
+<header><a class="brand" href="./"><span class="logo" aria-hidden="true">×</span> Mates en práctica</a><span class="tag">1.º de ESO</span></header>
+<main>
+<section class="intro"><p class="eyebrow">UN POCO DE TEORÍA, MUCHA PRÁCTICA</p><h1>Abre paréntesis.<br><span>Encuentra lo común.</span></h1><p>Dos formas de escribir lo mismo. Aprende la idea y ponte a prueba.</p></section>
+<section class="theory" aria-label="Teoría resumida">
+<article><div class="card-title"><span class="number">01</span><h2>Propiedad distributiva</h2></div><p>El número de fuera multiplica a <strong>cada término</strong> del paréntesis. Conserva la suma o la resta.</p><div class="formula">a · (b + c) = a · b + a · c</div><p class="example">3 · (x − 2) = 3x − 6</p></article>
+<article><div class="card-title"><span class="number">02</span><h2>Factor común</h2></div><p>Haz el camino inverso: saca un factor que tengan <strong>todos los términos</strong> y divide cada uno por él.</p><div class="formula">a · b + a · c = a · (b + c)</div><p class="example">6x + 9 = 3 · (2x + 3)</p></article>
+</section>
+<section class="practice" aria-labelledby="practice-title">
+<div class="practice-heading"><div><p class="eyebrow">AHORA TE TOCA</p><h2 id="practice-title">Tu entrenamiento</h2></div><div class="score"><strong id="score">0 / 16</strong><span>puntos</span></div></div>
+<div class="progress-caption"><span id="progress-text">0 de 16 ejercicios resueltos</span><button id="reset" class="text-button" type="button">Reiniciar</button></div><progress id="progress" max="16" value="0" aria-label="Ejercicios resueltos"></progress>
+<p class="rules">Cada ejercicio resuelto suma 1 punto. Puedes volver a intentarlo sin perder puntos. Tu progreso dura mientras esta página esté abierta.</p>
+<nav id="levels" aria-label="Niveles de ejercicios"></nav>
+<div class="level-heading"><div><p class="eyebrow" id="level-counter"></p><h3 id="level-title" tabindex="-1"></h3></div><span id="level-done" class="tag"></span></div>
+<p id="level-help"></p><div id="exercises"></div>
+<div class="level-footer"><p id="encouragement" role="status"></p><button id="next" class="primary" type="button">Siguiente nivel</button></div>
+</section>
+<noscript><p>Activa JavaScript en tu navegador para responder y corregir los ejercicios.</p></noscript>
+<footer>Practica a tu ritmo. Equivocarse también forma parte de aprender.</footer>
+</main>
+<dialog id="reset-dialog" aria-labelledby="reset-title"><h2 id="reset-title">¿Empezamos de nuevo?</h2><p>Se borrarán las respuestas y los puntos de los cuatro niveles.</p><div class="dialog-actions"><button id="cancel-reset" type="button">Seguir practicando</button><button id="confirm-reset" class="primary" type="button">Sí, reiniciar</button></div></dialog>
+</body></html>
