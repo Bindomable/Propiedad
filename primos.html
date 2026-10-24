@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#183c35"><meta name="description" content="Aprende a distinguir números primos y compuestos y a descomponer en factores primos con divisiones sucesivas. Ejercicio 52 de 1.º de ESO.">
+<title>Mates en práctica · Números primos</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23183c35'/%3E%3Ctext x='20' y='29' text-anchor='middle' font-size='30' fill='%23d8f36a'%3E×%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css?v=3"><script src="prime-math.js?v=1" defer></script><script src="primes.js?v=1" defer></script>
+</head>
+<body>
+<header><a class="brand" href="./"><span class="logo" aria-hidden="true">×</span> Mates en práctica</a><span class="tag">1.º de ESO</span></header>
+<main>
+<nav class="topic-nav" aria-label="Temas"><a href="./">Distributiva y factor común</a><a href="primos.html" aria-current="page">Números primos</a></nav>
+<section class="intro"><p class="eyebrow">DIVISIBILIDAD · EJERCICIO 52</p><h1>¿Primo o compuesto?<br><span>Descúbrelo paso a paso.</span></h1><p>Reconoce los primos, descompón en columna y cuenta los divisores.</p></section>
+<section class="practice lesson" aria-labelledby="learn-title">
+<div class="practice-heading"><h2 id="learn-title">Primero, entiende el proceso</h2><span class="tag" id="lesson-counter">Paso 1 de 4</span></div>
+<nav id="lesson-tabs" class="lesson-tabs" aria-label="Pasos de la explicación"></nav>
+<div id="lesson-content"></div>
+<div class="lesson-actions"><button id="lesson-prev" type="button">Paso anterior</button><button id="lesson-next" class="primary" type="button">Siguiente paso</button></div>
+</section>
+<section class="practice prime-practice" aria-labelledby="prime-practice-title">
+<div class="practice-heading"><div><p class="eyebrow">AHORA TE TOCA</p><h2 id="prime-practice-title">Tu práctica de primos</h2></div><div class="score"><strong id="prime-score">0 / 20</strong><span>puntos</span></div></div>
+<div class="progress-caption"><span id="prime-progress-text">0 de 20 ejercicios resueltos</span><button id="prime-reset" class="text-button" type="button">Reiniciar primos</button></div>
+<progress id="prime-progress" max="20" value="0" aria-label="Ejercicios de primos resueltos"></progress>
+<p class="rules" id="prime-save-status" role="status"></p>
+<nav id="prime-levels" class="prime-levels" aria-label="Niveles de primos"></nav>
+<h3 id="prime-level-title" tabindex="-1"></h3><p id="prime-level-help" class="level-help"></p>
+<nav id="prime-questions" class="question-nav" aria-label="Ejercicios del nivel"></nav>
+<div id="prime-exercise"></div>
+<div class="level-footer"><p id="prime-encouragement" role="status"></p><button id="prime-next" class="primary" type="button">Siguiente ejercicio</button></div>
+</section>
+<noscript><p>Activa JavaScript para ver los pasos y corregir los ejercicios.</p></noscript>
+<footer>Tu avance en primos y en distributiva se guarda por separado en este navegador.</footer>
+</main>
+<dialog id="prime-reset-dialog" aria-labelledby="prime-reset-title"><h2 id="prime-reset-title">¿Reiniciar números primos?</h2><p>Se borrarán las respuestas y los puntos de este tema en este navegador. El progreso de distributiva y factor común se conserva.</p><div class="dialog-actions"><button id="prime-cancel-reset" type="button">Seguir practicando</button><button id="prime-confirm-reset" type="button" class="primary">Sí, reiniciar primos</button></div></dialog>
+</body>
+</html>
