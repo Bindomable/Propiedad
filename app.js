@@ -19,7 +19,47 @@ function describe(level, row) {
   return { expression: `${a}${letters ? 'x' : ''} ${c} ${b}`, answers: [factor,a/factor,b/factor], parts: ['', ' · (', `${letters ? 'x' : ''} ${c} `,')'], labels: ['Factor','1.er término','2.º término'], hint: `Busca el mayor número que divide exactamente a ${a} y a ${b}. Después divide ambos por él.`, solution: `${a} ÷ ${factor} = ${a/factor} y ${b} ÷ ${factor} = ${b/factor}. Por eso: ${factor} · (${letters ? term(a/factor) : a/factor} ${c} ${b/factor}).` };
 }
 let current = 0;
-let states = levels.map(level => level.rows.map(() => ({ values: [], solved: false, message: '', kind: '', hint: false })));
+const emptyStates = () => levels.map(level => level.rows.map(() => ({ values: [], solved: false, message: '', kind: '', hint: false })));
+let states = emptyStates();
+const STORAGE_KEY = 'mates-en-practica:malena:v1';
+// La firma evita aplicar respuestas antiguas si cambia el banco de ejercicios.
+const exerciseSignature = JSON.stringify(levels.map(({ type, rows }) => ({ type, rows })));
+function restoreProgress() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!saved || saved.version !== 1 || saved.signature !== exerciseSignature || !Array.isArray(saved.states)) return;
+    states = levels.map((level, l) => level.rows.map((row, r) => {
+      const stored = saved.states[l]?.[r];
+      const item = describe(level, row);
+      const state = emptyStates()[l][r];
+      if (!stored || !Array.isArray(stored.values)) return state;
+      state.values = item.answers.map((_, i) => typeof stored.values[i] === 'string' ? stored.values[i].slice(0, 8) : '');
+      state.solved = stored.solved === true && state.values.every((value, i) => /^\d+$/.test(value.trim()) && Number(value.trim()) === item.answers[i]);
+      state.hint = stored.hint === true;
+      if (state.solved) {
+        state.kind = 'success';
+        state.message = `¡Correcto! Ejercicio completado. ${item.solution}`;
+      }
+      return state;
+    }));
+    if (Number.isInteger(saved.current) && saved.current >= 0 && saved.current < levels.length) current = saved.current;
+  } catch (_) {
+    // Un guardado dañado o bloqueado nunca impide seguir practicando.
+  }
+}
+function saveProgress() {
+  const status = document.getElementById('save-status');
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      version: 1, signature: exerciseSignature, current,
+      states: states.map(level => level.map(({ values, solved, hint }) => ({ values, solved, hint })))
+    }));
+    if (status) status.textContent = 'Malena, tu progreso se guarda automáticamente en este navegador.';
+  } catch (_) {
+    if (status) status.textContent = 'Este navegador no permite guardar el progreso. Puedes practicar, pero se perderá al cerrar o recargar la página.';
+  }
+}
+restoreProgress();
 const $ = id => document.getElementById(id);
 function score() { return states.flat().filter(state => state.solved).length; }
 function updateProgress() {
@@ -42,7 +82,7 @@ function render() {
     const button = document.createElement('button');
     button.type = 'button'; button.textContent = item.tab;
     if (index === current) button.setAttribute('aria-current','step');
-    button.addEventListener('click',() => { current = index; render(); $('level-title').focus(); });
+    button.addEventListener('click',() => { current = index; saveProgress(); render(); $('level-title').focus(); });
     $('levels').append(button);
   });
   $('level-counter').textContent = `NIVEL ${current+1} DE 4`;
@@ -63,7 +103,7 @@ function render() {
       input.setAttribute('aria-describedby',`${prefix}-title ${prefix}-feedback`);
       input.value = state.values[fieldIndex] || ''; input.disabled = state.solved;
       input.addEventListener('input',() => {
-        state.values[fieldIndex] = input.value; state.message = ''; state.kind = '';
+        state.values[fieldIndex] = input.value; state.message = ''; state.kind = ''; saveProgress();
         feedback.textContent = ''; feedback.className = 'feedback';
         form.querySelectorAll('input').forEach(field => field.removeAttribute('aria-invalid'));
       });
@@ -72,7 +112,7 @@ function render() {
     const last = document.createElement('span'); last.className = 'math-symbol'; last.textContent = item.parts.at(-1); equation.append(last);
     const feedback = form.querySelector('.feedback'); feedback.textContent = state.message; feedback.className = `feedback ${state.kind}`;
     form.querySelector('button').disabled = state.solved;
-    const hint = form.querySelector('details'); hint.open = state.hint; hint.addEventListener('toggle',() => { state.hint = hint.open; });
+    const hint = form.querySelector('details'); hint.open = state.hint; hint.addEventListener('toggle',() => { state.hint = hint.open; saveProgress(); });
     form.addEventListener('submit',event => {
       event.preventDefault(); if (state.solved) return;
       const inputs = [...form.querySelectorAll('input')];
@@ -92,18 +132,19 @@ function render() {
           inputs.forEach((input,i) => input.setAttribute('aria-invalid',String(Number(input.value.trim()) !== item.answers[i])));
         }
       }
-      feedback.textContent = state.message; feedback.className = `feedback ${state.kind}`; updateProgress();
+      feedback.textContent = state.message; feedback.className = `feedback ${state.kind}`; updateProgress(); saveProgress();
     });
     $('exercises').append(form);
   });
   $('next').hidden = current === levels.length-1;
   updateProgress();
 }
-$('next').addEventListener('click',() => { if (current < levels.length-1) current++; render(); $('level-title').focus(); });
+$('next').addEventListener('click',() => { if (current < levels.length-1) current++; saveProgress(); render(); $('level-title').focus(); });
 $('reset').addEventListener('click',() => $('reset-dialog').showModal());
 $('cancel-reset').addEventListener('click',() => $('reset-dialog').close());
 $('confirm-reset').addEventListener('click',() => {
-  states = levels.map(level => level.rows.map(() => ({ values: [], solved: false, message: '', kind: '', hint: false })));
-  current = 0; $('reset-dialog').close(); render(); $('level-title').focus();
+  states = emptyStates();
+  current = 0; saveProgress(); $('reset-dialog').close(); render(); $('level-title').focus();
 });
 render();
+saveProgress();

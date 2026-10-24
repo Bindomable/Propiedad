@@ -18,7 +18,8 @@
 <section class="practice" aria-labelledby="practice-title">
 <div class="practice-heading"><div><p class="eyebrow">AHORA TE TOCA</p><h2 id="practice-title">Tu entrenamiento</h2></div><div class="score"><strong id="score">0 / 16</strong><span>puntos</span></div></div>
 <div class="progress-caption"><span id="progress-text">0 de 16 ejercicios resueltos</span><button id="reset" class="text-button" type="button">Reiniciar</button></div><progress id="progress" max="16" value="0" aria-label="Ejercicios resueltos"></progress>
-<p class="rules">Cada ejercicio resuelto suma 1 punto. Puedes volver a intentarlo sin perder puntos. Tu progreso dura mientras esta página esté abierta.</p>
+<p class="rules">Cada ejercicio resuelto suma 1 punto. Puedes volver a intentarlo sin perder puntos. Puedes continuar otro día en el mismo navegador.</p>
+<p id="save-status" class="rules" role="status" aria-live="polite"></p>
 <nav id="levels" aria-label="Niveles de ejercicios"></nav>
 <div class="level-heading"><div><p class="eyebrow" id="level-counter"></p><h3 id="level-title" tabindex="-1"></h3></div><span id="level-done" class="tag"></span></div>
 <p id="level-help"></p><div id="exercises"></div>
@@ -27,5 +28,5 @@
 <noscript><p>Activa JavaScript en tu navegador para responder y corregir los ejercicios.</p></noscript>
 <footer>Practica a tu ritmo. Equivocarse también forma parte de aprender.</footer>
 </main>
-<dialog id="reset-dialog" aria-labelledby="reset-title"><h2 id="reset-title">¿Empezamos de nuevo?</h2><p>Se borrarán las respuestas y los puntos de los cuatro niveles.</p><div class="dialog-actions"><button id="cancel-reset" type="button">Seguir practicando</button><button id="confirm-reset" class="primary" type="button">Sí, reiniciar</button></div></dialog>
+<dialog id="reset-dialog" aria-labelledby="reset-title"><h2 id="reset-title">¿Empezamos de nuevo?</h2><p>Se borrará el progreso guardado de Malena en este navegador: respuestas y puntos de los cuatro niveles.</p><div class="dialog-actions"><button id="cancel-reset" type="button">Seguir practicando</button><button id="confirm-reset" class="primary" type="button">Sí, reiniciar</button></div></dialog>
 </body></html>
