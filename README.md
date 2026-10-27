@@ -44,3 +44,13 @@ node tests/prime-storage.test.cjs
 ```
 
 Las pruebas verifican los ocho resultados del libro, la cantidad de divisores mediante recuento exhaustivo, divisiones alternativas, rechazo de factores compuestos, restauración y aislamiento del almacenamiento. La comprobación en navegador recorre los 20 ejercicios y verifica recarga, reinicio y continuidad del tema anterior.
+
+## M.C.D. y M.C.M.
+
+`mcd-mcm.html` añade un tercer tema independiente, con explicación en cuatro pasos,
+descomposición en columna, comparación de exponentes y 16 ejercicios con corrección.
+`common-math.js` calcula la selección de factores; `common.js` gestiona la práctica.
+La clave `mates-en-practica:malena:mcd-mcm:v1` guarda el avance sin modificar las
+claves existentes de distributiva o números primos. No se incluye un reinicio global.
+
+Prueba adicional: `node tests/common.test.cjs`.
